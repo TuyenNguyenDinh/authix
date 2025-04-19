@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MfaOpt extends Model
+class MfaOtp extends Model
 {
     protected $fillable = [
         'user_id',

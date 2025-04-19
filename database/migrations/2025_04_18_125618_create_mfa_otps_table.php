@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mfa_opts', function (Blueprint $table) {
+        Schema::create('mfa_otps', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('opt_code');
+            $table->string('otp_code');
             $table->timestamp('expired_at');
             $table->timestamp('verified_at')->nullable();
             $table->unsignedTinyInteger('attempts')->default(0);
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mfa_opts');
+        Schema::dropIfExists('mfa_otps');
     }
 };
