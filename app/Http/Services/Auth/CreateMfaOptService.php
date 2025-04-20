@@ -3,6 +3,7 @@
 namespace App\Http\Services\Auth;
 
 use App\Models\MfaOtp;
+use Illuminate\Support\Str;
 use Random\RandomException;
 
 class CreateMfaOptService
@@ -18,6 +19,7 @@ class CreateMfaOptService
             'expired_at' => now()->addMinutes(5),
             'attempts' => 0,
             'device_hash' => $deviceHash,
+            'temp_token' => Str::uuid(),
         ]);
     }
 }

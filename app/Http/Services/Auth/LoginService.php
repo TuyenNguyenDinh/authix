@@ -11,18 +11,18 @@ class LoginService
     /**
      * @throws \Exception
      */
-    public function run(array $data): true
+    public function run(array $data): array
     {
         $user = User::query()->where('email', $data['email'])->first();
 
         if (! $user || ! Hash::check($data['password'], $user->password)) {
             throw new \Exception('Invalid credentials', 401);
         }
-        // TODO: Uncomment this line when implementing verification
-//        $token = $user->createToken('auth_token')->plainTextToken;
         $opt = resolve(CreateMfaOptService::class)->run($user->id, $data['device_hash'] ?? null);
         $user->notify(new OptNotification($opt->otp_code));
 
-        return true;
+        return [
+            'temp_token' => $opt?->temp_token,
+        ];
     }
 }
