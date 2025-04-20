@@ -13,4 +13,8 @@ Route::prefix('v1')->group(function () {
         Route::post('login', 'login');
         Route::post('verify-otp', 'verifyOtp');
     });
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('me', [AuthController::class, 'me']);
+    });
 });
