@@ -7,6 +7,7 @@ use App\Http\Requests\VerifyOtpRequest;
 use App\Http\Services\Auth\LoginService;
 use App\Http\Services\Auth\VerifyMfaOptService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -26,5 +27,10 @@ class AuthController extends Controller
         $verify = resolve(VerifyMfaOptService::class)->run($data);
 
         return $verify ? responseSuccess($verify, config('messages.auth.otp_verified')) : responseError();
+    }
+
+    public function me(Request $request): JsonResponse
+    {
+        return responseSuccess($request->user(), config('messages.common.success'));
     }
 }

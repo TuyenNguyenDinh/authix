@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'common' => [
+        'success' => 'Success',
+    ],
     'auth' => [
         'email_required' => 'Email is required',
         'email_email' => 'Email is not valid',

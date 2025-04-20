@@ -16,7 +16,7 @@ class VerifyMfaOptService
         $otpCode = $data['otp'];
         $mfaOtp = MfaOtp::query()->with('user')->where('temp_token', $tempToken)->first();
 
-        if (! $mfaOtp->isExpired() || $mfaOtp->otp_code !== $otpCode) {
+        if ($mfaOtp->isExpired() || $mfaOtp->otp_code !== $otpCode) {
             throw new OtpExpiredException();
         }
 
