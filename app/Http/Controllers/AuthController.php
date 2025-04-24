@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\VerifyOtpRequest;
 use App\Http\Services\Auth\LoginService;
+use App\Http\Services\Auth\LogoutService;
 use App\Http\Services\Auth\VerifyMfaOptService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,8 +30,15 @@ class AuthController extends Controller
         return $verify ? responseSuccess($verify, config('messages.auth.otp_verified')) : responseError();
     }
 
-    public function me(Request $request): JsonResponse
+    public function me(): JsonResponse
     {
-        return responseSuccess($request->user(), config('messages.common.success'));
+        return responseSuccess(auth()->user(), config('messages.common.success'));
+    }
+
+    public function logout(): JsonResponse
+    {
+        resolve(LogoutService::class)->run();
+
+        return responseSuccessNotData(config('messages.auth.logout'));
     }
 }
