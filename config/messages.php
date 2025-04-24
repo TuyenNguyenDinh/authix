@@ -24,5 +24,6 @@ return [
         'temp_token_required' => 'Temp token is required',
         'temp_token_string' => 'Temp token must be a string',
         'temp_token_exists' => 'Temp token does not exist',
+        'logout' => 'Logout successfully',
     ]
 ];
